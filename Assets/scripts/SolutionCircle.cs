@@ -1,0 +1,65 @@
+using UnityEngine;
+using UnityEngine.U2D;
+using System.Collections.Generic;
+
+public class SolutionCircle : MonoBehaviour
+{
+    public SpriteShapeController spriteShapeController;
+    public GameObject pointPrefab;
+    public Color defaultColor = Color.white;
+    public Color highlightColor = Color.red;
+    public float defaultSize = 0.1f;
+    public float highlightSize = 0.2f;
+
+    private Spline spline;
+    private int selectedPointIndex = -1;
+    private List<GameObject> pointIndicators = new List<GameObject>();
+
+    void Start()
+    {
+        spline = spriteShapeController.spline;
+        CreatePointIndicators();
+    }
+
+    
+
+    void CreatePointIndicators()
+    {
+        foreach (GameObject point in pointIndicators)
+        {
+            Destroy(point);
+        }
+        pointIndicators.Clear();
+
+        for (int i = 0; i < spline.GetPointCount(); i++)
+        {
+            Vector3 position = spline.GetPosition(i);
+            GameObject pointIndicator = Instantiate(pointPrefab, position, Quaternion.identity, transform);
+            pointIndicator.GetComponent<Renderer>().material.color = defaultColor;
+            pointIndicator.transform.localScale = Vector3.one * defaultSize;
+            pointIndicators.Add(pointIndicator);
+        }
+    }
+
+    void UpdatePointIndicator(int index, Vector3 position)
+    {
+        if (index < 0 || index >= pointIndicators.Count) return;
+
+        pointIndicators[index].transform.position = position;
+    }
+
+    void HighlightPoint(int index, bool highlight)
+    {
+        GameObject pointIndicator = pointIndicators[index];
+        if (highlight)
+        {
+            pointIndicator.GetComponent<Renderer>().material.color = highlightColor;
+            pointIndicator.transform.localScale = Vector3.one * highlightSize;
+        }
+        else
+        {
+            pointIndicator.GetComponent<Renderer>().material.color = defaultColor;
+            pointIndicator.transform.localScale = Vector3.one * defaultSize;
+        }
+    }
+}
