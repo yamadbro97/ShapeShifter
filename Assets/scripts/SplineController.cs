@@ -2,8 +2,10 @@ using UnityEngine;
 using UnityEngine.U2D;
 using System.Collections.Generic;
 
-public class highlight : MonoBehaviour
+public class SplineController : MonoBehaviour
 {
+    public delegate void DragEndedDelegate(SplineController draggableObject);
+    public DragEndedDelegate dragEndedCallback;
     public SpriteShapeController spriteShapeController;
     public GameObject pointPrefab;
     public Color defaultColor = Color.white;
@@ -56,6 +58,7 @@ public class highlight : MonoBehaviour
                 HighlightPoint(selectedPointIndex, false);
             }
             selectedPointIndex = -1;
+            dragEndedCallback(this);
         }
     }
 

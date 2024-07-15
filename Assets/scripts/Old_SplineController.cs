@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class SplineEditor : MonoBehaviour
+public class OLDSplineController : MonoBehaviour
 {
+    public delegate void DragEndedDelegate(SplineController draggableObject);
+    public DragEndedDelegate dragEndedCallback;
     public SpriteShapeController spriteShapeController;
     private Spline spline;
     private int selectedPointIndex = -1;
@@ -40,6 +42,7 @@ public class SplineEditor : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             selectedPointIndex = -1;
+            dragEndedCallback(this);
         }
     }
 
