@@ -12,10 +12,12 @@ public class SplineController : MonoBehaviour
     public Color highlightColor = Color.red;
     public float defaultSize = 0.1f;
     public float highlightSize = 0.2f;
+    public float additionalRange = 0f;
 
     private Spline spline;
     private int selectedPointIndex = -1;
     private List<GameObject> pointIndicators = new List<GameObject>();
+    private CircleCollider2D circleCollider;
 
     void Start()
     {
@@ -25,7 +27,8 @@ public class SplineController : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
+        
+            HandleInput();
 
     }
 
@@ -36,7 +39,7 @@ public class SplineController : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) /*&& IsMouseInRange()*/)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
@@ -146,9 +149,9 @@ public class SplineController : MonoBehaviour
         mouseWorldPosition.z = 0; // Ensure z-coordinate is zero for 2D
 
         // Calculate the distance between the mouse position and the target object's position
-        float distance = Vector3.Distance(mouseWorldPosition, targetObject.transform.position);
+        float distance = Vector3.Distance(mouseWorldPosition, pointPrefab.transform.position);
 
         // Check if the distance is within the collider's radius plus any additional range
         return distance <= (circleCollider.radius + additionalRange);
-    } */
+    }*/ 
 }
