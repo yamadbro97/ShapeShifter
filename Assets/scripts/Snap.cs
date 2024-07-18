@@ -1,12 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SnapToPosition2D : MonoBehaviour
+public class SnapToStaticCircle : MonoBehaviour
 {
-    public Transform snapPosition; // The target position to snap to
-    public float snapRange = 1.0f; // The distance within which the object will snap to the target position
+    public GameObject staticCircle; // Reference to the StaticCircle GameObject
+    public float snapRange = 1.0f; // The range within which snapping will occur
 
     private Vector3 offset;
     private bool isDragging = false;
+
+    void Start()
+    {
+        // Ensure the staticCircle reference is set
+        if (staticCircle == null)
+        {
+            Debug.LogError("StaticCircle is not assigned!");
+        }
+    }
 
     void OnMouseDown()
     {
@@ -27,12 +38,12 @@ public class SnapToPosition2D : MonoBehaviour
     void OnMouseUp()
     {
         isDragging = false;
-        // Check the distance to the snap position
-        float distance = Vector3.Distance(transform.position, snapPosition.position);
+        // Check the distance to the static circle
+        float distance = Vector3.Distance(transform.position, staticCircle.transform.position);
         if (distance <= snapRange)
         {
-            // Snap to the designated position
-            transform.position = snapPosition.position;
+            // Snap to the position of the static circle
+            transform.position = staticCircle.transform.position;
         }
     }
 
@@ -44,3 +55,4 @@ public class SnapToPosition2D : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
 }
+

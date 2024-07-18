@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.U2D;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public class SplineController : MonoBehaviour
 {
-    public delegate void DragEndedDelegate(SplineController draggableObject);
-    public DragEndedDelegate dragEndedCallback;
+    
     public SpriteShapeController spriteShapeController;
     public GameObject pointPrefab;
     public Color defaultColor = Color.white;
@@ -26,10 +26,16 @@ public class SplineController : MonoBehaviour
     void Update()
     {
         HandleInput();
+
     }
 
     void HandleInput()
     {
+        if (IsPointerOverUIElement())
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -58,7 +64,7 @@ public class SplineController : MonoBehaviour
                 HighlightPoint(selectedPointIndex, false);
             }
             selectedPointIndex = -1;
-            dragEndedCallback(this);
+          
         }
     }
 
@@ -119,4 +125,30 @@ public class SplineController : MonoBehaviour
             pointIndicator.transform.localScale = Vector3.one * defaultSize;
         }
     }
+    bool IsPointerOverUIElement()
+    {
+        // Check if the pointer is over a UI element
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+    /*bool IsMouseInRange()
+    {
+        if (circleCollider == null)
+        {
+            return false;
+        }
+
+        // Get the mouse position in world coordinates
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0; // Ensure z-coordinate is zero for 2D
+
+        // Calculate the distance between the mouse position and the target object's position
+        float distance = Vector3.Distance(mouseWorldPosition, targetObject.transform.position);
+
+        // Check if the distance is within the collider's radius plus any additional range
+        return distance <= (circleCollider.radius + additionalRange);
+    } */
 }

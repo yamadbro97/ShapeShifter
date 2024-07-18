@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7033819476161543132}
   - component: {fileID: 6089014367494274265}
   - component: {fileID: -8841035487288243043}
-  - component: {fileID: -7737943448560625952}
+  - component: {fileID: -6668966423961853287}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
---- !u!114 &-7737943448560625952
+--- !u!114 &-6668966423961853287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,12 +130,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3815482446781854955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bee442ac92dc04485d9d3ae49216fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ab05f5d00fd11e48af1ae37a8065fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteShapeController: {fileID: 0}
-  pointPrefab: {fileID: 0}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
-  defaultSize: 0.1
-  highlightSize: 0.2
+  staticCircle: {fileID: 8612824930744803136, guid: 6077bd58810efdd4aa58f8e68c0494d8, type: 3}
+  snapRange: 2
