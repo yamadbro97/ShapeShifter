@@ -42,7 +42,35 @@ public class SplineController : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
-            selectedPointIndex = GetClosestPointIndex(mousePosition);
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mousePosition);
+
+            if (colliders.Length > 0)
+            {
+                Collider2D closestCollider = null;
+                float closestDistance = float.MaxValue;
+
+                foreach (Collider2D col in colliders)
+                {
+                    // Calculate distance from mouse position to the collider's transform position
+                    float distance = Vector2.Distance(mousePosition, col.transform.position);
+
+                    // Find the closest collider
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestCollider = col;
+                    }
+                }
+
+                if (closestCollider != null)
+                {
+                    selectedPointIndex = GetClosestPointIndex(mousePosition);
+                    Debug.Log("Clicked on the closest GameObject: " + closestCollider.gameObject.name);
+                    // For example:
+                    // closestCollider.gameObject.SetActive(false);
+                }
+            }
+            
 
             if (selectedPointIndex != -1)
             {
@@ -74,6 +102,8 @@ public class SplineController : MonoBehaviour
     {
         float minDistance = float.MaxValue;
         int closestPointIndex = -1;
+
+
 
         for (int i = 0; i < spline.GetPointCount(); i++)
         {
@@ -136,5 +166,7 @@ public class SplineController : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
+
+
     
 }
