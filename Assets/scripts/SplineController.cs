@@ -43,7 +43,7 @@ public class SplineController : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
             Collider2D[] colliders = Physics2D.OverlapPointAll(mousePosition);
-
+            
             if (colliders.Length > 0)
             {
                 Collider2D closestCollider = null;
