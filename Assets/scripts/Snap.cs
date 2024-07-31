@@ -5,7 +5,7 @@ using UnityEngine;
 public class SnapToStaticCircle : MonoBehaviour
 {
     public GameObject staticCircle; // Reference to the StaticCircle GameObject
-    public float snapRange = 5.0f; // The range within which snapping will occur
+    public float snapRange = 1.0f; // The range within which snapping will occur
 
     void Start()
     {
@@ -16,15 +16,16 @@ public class SnapToStaticCircle : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
         // Check the distance to the static circle
         float distance = Vector3.Distance(transform.position, staticCircle.transform.position);
-        if (distance <= snapRange && Input.GetMouseButtonUp(0))
+        print(distance);
+       /* if (distance <= snapRange && Input.GetMouseButtonUp(0))
         {
             // Snap to the position of the static circle
             transform.position = staticCircle.transform.position;
-        }
+        } */
     }
 
     
