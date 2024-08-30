@@ -11,7 +11,9 @@ public class SplineController : MonoBehaviour
     public Color defaultColor = Color.white;
     public Color highlightColor = Color.red;
     public float defaultSize = 0.1f;
-    public float highlightSize = 0.2f;  
+    public float highlightSize = 0.2f;
+    
+    
 
     private Spline spline;
     private int selectedPointIndex = -1;
@@ -22,6 +24,7 @@ public class SplineController : MonoBehaviour
     {
         spline = spriteShapeController.spline;
         CreatePointIndicators();
+        circleCollider = GetComponent<CircleCollider2D>();
     }
 
     void Update()
@@ -71,6 +74,7 @@ public class SplineController : MonoBehaviour
                 }
             }
             
+            
 
             if (selectedPointIndex != -1)
             {
@@ -89,12 +93,15 @@ public class SplineController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+           
             if (selectedPointIndex != -1)
             {
                 HighlightPoint(selectedPointIndex, false);
+
             }
             selectedPointIndex = -1;
-          
+            
+
         }
     }
 

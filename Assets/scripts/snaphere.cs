@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class snaphere : MonoBehaviour
 {
-    public GameObject Circle;
-    public float snapRange = 1.0f;
-    // Start is called before the first frame update
+
+    private CircleCollider2D circleCollider;
+    public SplineController splineController;
     void Start()
     {
-        
+        circleCollider = GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check the distance to the static circle
-        float distance = Vector3.Distance(transform.position, Circle.transform.position);
-        print(distance);
-         if (distance <= snapRange && Input.GetMouseButtonUp(0))
-         {
-             // Snap to the position of the static circle
-             Circle.transform.position = transform.position;
-         }
+        HandleInput();
+    }
 
+    void HandleInput()
+    {
+        // Check if the mouse button is released
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (circleCollider.OverlapPoint(GameObject.FindWithTag("SnapPosition").transform.position))
+            {
+                transform.position = GameObject.FindWithTag("SnapPosition").transform.position;
+                
+            }
+
+        }
     }
 }
