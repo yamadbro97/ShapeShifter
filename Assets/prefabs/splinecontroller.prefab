@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 469399720582066512}
   - component: {fileID: 3815232880302173064}
   - component: {fileID: 3346550979396804173}
+  - component: {fileID: 4940236937891462426}
   m_Layer: 0
   m_Name: splinecontroller
   m_TagString: Untagged
@@ -187,14 +188,39 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2553841808849644795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57bee442ac92dc04485d9d3ae49216fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteShapeController: {fileID: 3815232880302173064}
-  pointPrefab: {fileID: 3815482446781854955, guid: 3ebe41275fd57bc47890f854318b2cc4, type: 3}
   defaultColor: {r: 1, g: 0, b: 0.038640022, a: 1}
   highlightColor: {r: 0, g: 1, b: 0.034508705, a: 1}
   defaultSize: 0.2
   highlightSize: 0.2
+  spline:
+    m_IsOpenEnded: 0
+    m_ControlPoints: []
+  selectedPointIndex: -1
+--- !u!114 &4940236937891462426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553841808849644795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7ac2143ae287d4689e5df317d7f7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteShapeController: {fileID: 3815232880302173064}
+  pointPrefabs: []
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  defaultSize: 0.1
+  highlightSize: 0.2
+  spline:
+    m_IsOpenEnded: 0
+    m_ControlPoints: []
+  selectedPointIndex: -1

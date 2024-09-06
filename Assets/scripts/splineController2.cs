@@ -4,17 +4,17 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class SplineController : MonoBehaviour
+public class SplineController2 : MonoBehaviour
 {
-    
+
     public SpriteShapeController spriteShapeController;
-    //public GameObject pointPrefab;
+   [SerializeField] public GameObject[] pointPrefabs;
     public Color defaultColor = Color.white;
     public Color highlightColor = Color.red;
     public float defaultSize = 0.1f;
     public float highlightSize = 0.2f;
-    
-    
+
+
 
     public Spline spline;
     public int selectedPointIndex = -1;
@@ -25,15 +25,16 @@ public class SplineController : MonoBehaviour
     {
         spline = spriteShapeController.spline;
         CreatePointIndicators();
+        Debug.Log(pointPrefabs.Length);
         
     }
 
     void Update()
     {
-        
-            HandleInput();
-       
-        
+
+        HandleInput();
+
+
     }
 
     void HandleInput()
@@ -48,7 +49,7 @@ public class SplineController : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
             Collider2D[] colliders = Physics2D.OverlapPointAll(mousePosition);
-            
+
             if (colliders.Length > 0)
             {
                 Collider2D closestCollider = null;
@@ -75,8 +76,8 @@ public class SplineController : MonoBehaviour
                     // closestCollider.gameObject.SetActive(false);
                 }
             }
-            
-            
+
+
 
             if (selectedPointIndex != -1)
             {
@@ -95,22 +96,22 @@ public class SplineController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-           // Debug.Log(snaphere.circleCollider.isTrigger);
-           /*if (snaphere.circleCollider.isTrigger)
-            {
-                spline.SetPosition(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
-                spriteShapeController.BakeMesh();
-                UpdatePointIndicator(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
-            } */
+            // Debug.Log(snaphere.circleCollider.isTrigger);
+            /*if (snaphere.circleCollider.isTrigger)
+             {
+                 spline.SetPosition(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
+                 spriteShapeController.BakeMesh();
+                 UpdatePointIndicator(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
+             } */
 
             if (selectedPointIndex != -1)
             {
                 HighlightPoint(selectedPointIndex, false);
-                
+
 
             }
             selectedPointIndex = -1;
-            
+
 
         }
     }
@@ -135,6 +136,7 @@ public class SplineController : MonoBehaviour
         return closestPointIndex;
     }
 
+    
     void CreatePointIndicators()
     {
         // make it so that you can define the pointindicators manually as object kids?
@@ -143,24 +145,30 @@ public class SplineController : MonoBehaviour
             Destroy(point);
         }
         pointIndicators.Clear();
-
         for (int i = 0; i < spline.GetPointCount(); i++)
         {
-            if (GameObject.Find("Circle_" + i))
+            
+            if (pointPrefabs[i] != null)
             {
                 Vector3 position = spline.GetPosition(i);
-                GameObject pointIndicator = Instantiate(GameObject.Find("Circle_" + i), position, Quaternion.identity, transform);
+                GameObject pointIndicator = Instantiate(pointPrefabs[i], position, Quaternion.identity, transform);
                 pointIndicator.GetComponent<Renderer>().material.color = defaultColor;
                 pointIndicator.transform.localScale = Vector3.one * defaultSize;
                 pointIndicator.name = "Circle_" + i;
                 pointIndicators.Add(pointIndicator);
+                
+            }
+            else
+            {
+                Debug.Log("Amount of Pointprefabs is less than the spline count");
             }
         }
+        
     }
 
     public void UpdatePointIndicator(int index, Vector3 position)
     {
-        if (index < 0 || index >= pointIndicators.Count) return ;
+        if (index < 0 || index >= pointIndicators.Count) return;
 
         pointIndicators[index].transform.position = position;
         ;
@@ -189,7 +197,7 @@ public class SplineController : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
-   
+
 
 
 
