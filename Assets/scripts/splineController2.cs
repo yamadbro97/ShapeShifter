@@ -150,8 +150,13 @@ public class SplineController2 : MonoBehaviour
             
             if (pointPrefabs[i] != null)
             {
-                Vector3 position = spline.GetPosition(i);
-                GameObject pointIndicator = Instantiate(pointPrefabs[i], position, Quaternion.identity, transform);
+                GameObject pointIndicator = pointPrefabs[i];
+               Vector3 position = spline.GetPosition(i);
+               // GameObject pointIndicator = Instantiate(pointPrefabs[i], position, Quaternion.identity, transform);
+               //PROBLEM WITH ABOVE LINE: DUPLICATES GAMEOBJECTS
+               // above line can be removed, note: No need to instantiate new objects just use the already existing ones
+               // since they have been prefilled/defined through the unity editor by you
+               pointIndicator.transform.position = position;
                 pointIndicator.GetComponent<Renderer>().material.color = defaultColor;
                 pointIndicator.transform.localScale = Vector3.one * defaultSize;
                 pointIndicator.name = "Circle_" + i;
