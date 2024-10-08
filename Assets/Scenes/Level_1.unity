@@ -984,7 +984,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 943664429660740243}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57bee442ac92dc04485d9d3ae49216fd, type: 3}
   m_Name: 
@@ -1003,7 +1003,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 80f77a76467b24d1a856328afa989eb3, type: 3}
     - target: {fileID: 469399720582066512, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 469399720582066512, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
       propertyPath: m_Sprites.Array.size

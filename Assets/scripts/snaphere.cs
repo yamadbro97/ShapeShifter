@@ -11,6 +11,7 @@ public class snaphere : MonoBehaviour
 
     public CircleCollider2D circleCollider;
     public SplineController2 splineController;
+   
     
     void Start()
     {
@@ -28,32 +29,37 @@ public class snaphere : MonoBehaviour
         // Check if the mouse button is released
         if (Input.GetMouseButtonUp(0))
         {
-            if (circleCollider.OverlapPoint(GameObject.FindWithTag("SnapPosition").transform.position))
+            GameObject[] snapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
+
+            foreach (GameObject snapPosition in snapPositions)
             {
-                
-                transform.position = GameObject.FindWithTag("SnapPosition").transform.position;
-                circleCollider.isTrigger = true;
-                Debug.Log(splineController.pointPrefabs);
-                for (int i = 0; i < splineController.pointPrefabs.Length; i++)
+                if (circleCollider.OverlapPoint(snapPosition.transform.position))
                 {
-                   
-                    if (name == "Circle_" + i)
+
+                    transform.position = snapPosition.transform.position;
+                    circleCollider.isTrigger = true; // unnecessary
+                    Debug.Log(splineController.pointPrefabs);
+                    for (int i = 0; i < splineController.pointPrefabs.Length; i++)
                     {
-                        Debug.Log(name == "Circle_" + i);
-                        Debug.Log(name);
-                        splineController.spline.SetPosition(i, GameObject.FindWithTag("SnapPosition").transform.position);
-                        splineController.spriteShapeController.BakeMesh();
-                        splineController.UpdatePointIndicator(i, GameObject.FindWithTag("SnapPosition").transform.position);
-                        
+
+                        if (name == "Circle_" + i)
+                        {
+                            Debug.Log(name == "Circle_" + i);
+                            Debug.Log(name);
+                            splineController.spline.SetPosition(i, snapPosition.transform.position);
+                            splineController.spriteShapeController.BakeMesh();
+                            splineController.UpdatePointIndicator(i, snapPosition.transform.position);
+
+                        }
                     }
+
                 }
-                
             }
 
         }
         else
         {
-            circleCollider.isTrigger = false;
+            circleCollider.isTrigger = false; // unnecessary
         }
 
     }
