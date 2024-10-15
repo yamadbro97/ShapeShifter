@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
+//using System.Numerics;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -30,14 +30,23 @@ public class snaphere : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             GameObject[] snapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
-
+            float closestTarget = float.MaxValue;
+            GameObject closestSnapPosition = null;
             foreach (GameObject snapPosition in snapPositions)
             {
-                if (circleCollider.OverlapPoint(snapPosition.transform.position))
+                // Calculate distance from the circle to the Target positions transform position
+                float distance = Vector2.Distance(transform.position, snapPosition.transform.position);
+
+                if (distance < closestTarget)
+                {
+                    closestTarget = distance;
+                    closestSnapPosition = snapPosition;
+                }
+            }
+                if (circleCollider.OverlapPoint(closestSnapPosition.transform.position))
                 {
 
-                    transform.position = snapPosition.transform.position;
-                    circleCollider.isTrigger = true; // unnecessary
+                    transform.position = closestSnapPosition.transform.position;
                     Debug.Log(splineController.pointPrefabs);
                     for (int i = 0; i < splineController.pointPrefabs.Length; i++)
                     {
@@ -46,22 +55,17 @@ public class snaphere : MonoBehaviour
                         {
                             Debug.Log(name == "Circle_" + i);
                             Debug.Log(name);
-                            splineController.spline.SetPosition(i, snapPosition.transform.position);
+                            splineController.spline.SetPosition(i, closestSnapPosition.transform.position);
                             splineController.spriteShapeController.BakeMesh();
-                            splineController.UpdatePointIndicator(i, snapPosition.transform.position);
+                            splineController.UpdatePointIndicator(i, closestSnapPosition.transform.position);
 
                         }
                     }
-
                 }
-            }
-
+            
         }
-        else
-        {
-            circleCollider.isTrigger = false; // unnecessary
-        }
-
     }
+
+
     
 }
