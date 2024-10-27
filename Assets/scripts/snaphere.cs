@@ -47,13 +47,11 @@ public class snaphere : MonoBehaviour
                 {
 
                     transform.position = closestSnapPosition.transform.position;
-                    Debug.Log(splineController.pointPrefabs);
                     for (int i = 0; i < splineController.pointPrefabs.Length; i++)
                     {
 
                         if (name == "Circle_" + i)
                         {
-                            Debug.Log(name == "Circle_" + i);
                             Debug.Log(name);
                             splineController.spline.SetPosition(i, closestSnapPosition.transform.position);
                             splineController.spriteShapeController.BakeMesh();

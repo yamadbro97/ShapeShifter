@@ -96,14 +96,7 @@ public class SplineController2 : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            // Debug.Log(snaphere.circleCollider.isTrigger);
-            /*if (snaphere.circleCollider.isTrigger)
-             {
-                 spline.SetPosition(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
-                 spriteShapeController.BakeMesh();
-                 UpdatePointIndicator(selectedPointIndex, GameObject.FindWithTag("SnapPosition").transform.position);
-             } */
-
+            
             if (selectedPointIndex != -1)
             {
                 HighlightPoint(selectedPointIndex, false);
