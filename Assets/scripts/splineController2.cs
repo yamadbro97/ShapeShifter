@@ -3,6 +3,7 @@ using UnityEngine.U2D;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using System.Diagnostics.Tracing;
 
 public class SplineController2 : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SplineController2 : MonoBehaviour
 
     public Spline spline;
     public int selectedPointIndex = -1;
+    public Vector3 originalPosition;
 
     private List<GameObject> pointIndicators = new List<GameObject>();
 
@@ -25,7 +27,7 @@ public class SplineController2 : MonoBehaviour
     {
         spline = spriteShapeController.spline;
         CreatePointIndicators();
-        Debug.Log(pointPrefabs.Length);
+       //Debug.Log(pointPrefabs.Length);
         
     }
 
@@ -57,15 +59,19 @@ public class SplineController2 : MonoBehaviour
 
                 foreach (Collider2D col in colliders)
                 {
-                    // Calculate distance from mouse position to the collider's transform position
-                    float distance = Vector2.Distance(mousePosition, col.transform.position);
-
-                    // Find the closest collider
-                    if (distance < closestDistance)
+                    if (!col.gameObject.CompareTag("SnapPosition"))
                     {
-                        closestDistance = distance;
-                        closestCollider = col;
-                    }
+                        // Calculate distance from mouse position to the collider's transform position
+                        float distance = Vector2.Distance(mousePosition, col.transform.position);
+
+                        // Find the closest collider
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestCollider = col;
+                            originalPosition = col.transform.position;
+                        }
+                    }  
                 }
 
                 if (closestCollider != null)
@@ -96,11 +102,23 @@ public class SplineController2 : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            
+           /* int counter = 0;
+            GameObject[] SnapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
+            foreach (GameObject SnapPosition in SnapPositions)
+            {
+                if(spline.GetPosition(selectedPointIndex) == SnapPosition.transform.position)
+                {
+                    counter++;
+                }
+            }
+            if(counter == 0)
+            {
+                spline.SetPosition(selectedPointIndex, originalPosition);
+                UpdatePointIndicator(selectedPointIndex, originalPosition);
+            }*/
             if (selectedPointIndex != -1)
             {
                 HighlightPoint(selectedPointIndex, false);
-
 
             }
             selectedPointIndex = -1;
@@ -145,10 +163,6 @@ public class SplineController2 : MonoBehaviour
             {
                 GameObject pointIndicator = pointPrefabs[i];
                Vector3 position = spline.GetPosition(i);
-               // GameObject pointIndicator = Instantiate(pointPrefabs[i], position, Quaternion.identity, transform);
-               //PROBLEM WITH ABOVE LINE: DUPLICATES GAMEOBJECTS
-               // above line can be removed, note: No need to instantiate new objects just use the already existing ones
-               // since they have been prefilled/defined through the unity editor by you
                pointIndicator.transform.position = position;
                 pointIndicator.GetComponent<Renderer>().material.color = defaultColor;
                 pointIndicator.transform.localScale = Vector3.one * defaultSize;
@@ -169,7 +183,6 @@ public class SplineController2 : MonoBehaviour
         if (index < 0 || index >= pointIndicators.Count) return;
 
         pointIndicators[index].transform.position = position;
-        ;
     }
 
     void HighlightPoint(int index, bool highlight)
