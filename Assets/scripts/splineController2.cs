@@ -14,12 +14,12 @@ public class SplineController2 : MonoBehaviour
     public Color highlightColor = Color.red;
     public float defaultSize = 0.1f;
     public float highlightSize = 0.2f;
+    public int move_counter;
 
 
 
     public Spline spline;
     public int selectedPointIndex = -1;
-    public Vector3 originalPosition;
 
     private List<GameObject> pointIndicators = new List<GameObject>();
 
@@ -27,8 +27,7 @@ public class SplineController2 : MonoBehaviour
     {
         spline = spriteShapeController.spline;
         CreatePointIndicators();
-       //Debug.Log(pointPrefabs.Length);
-        
+        move_counter = 0;
     }
 
     void Update()
@@ -69,7 +68,6 @@ public class SplineController2 : MonoBehaviour
                         {
                             closestDistance = distance;
                             closestCollider = col;
-                            originalPosition = col.transform.position;
                         }
                     }  
                 }
@@ -78,8 +76,6 @@ public class SplineController2 : MonoBehaviour
                 {
                     selectedPointIndex = GetClosestPointIndex(mousePosition);
                     Debug.Log("Clicked on the closest GameObject: " + closestCollider.gameObject.name);
-                    // For example:
-                    // closestCollider.gameObject.SetActive(false);
                 }
             }
 
@@ -102,20 +98,6 @@ public class SplineController2 : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-           /* int counter = 0;
-            GameObject[] SnapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
-            foreach (GameObject SnapPosition in SnapPositions)
-            {
-                if(spline.GetPosition(selectedPointIndex) == SnapPosition.transform.position)
-                {
-                    counter++;
-                }
-            }
-            if(counter == 0)
-            {
-                spline.SetPosition(selectedPointIndex, originalPosition);
-                UpdatePointIndicator(selectedPointIndex, originalPosition);
-            }*/
             if (selectedPointIndex != -1)
             {
                 HighlightPoint(selectedPointIndex, false);

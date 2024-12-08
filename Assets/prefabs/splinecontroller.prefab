@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 469399720582066512}
   - component: {fileID: 3815232880302173064}
   - component: {fileID: 4940236937891462426}
+  - component: {fileID: 4791797928317790727}
   m_Layer: 0
   m_Name: splinecontroller
   m_TagString: Untagged
@@ -202,3 +203,23 @@ MonoBehaviour:
     m_IsOpenEnded: 0
     m_ControlPoints: []
   selectedPointIndex: -1
+  originalPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &4791797928317790727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553841808849644795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1ec672345ca8949aa40e0ea427b06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ranges: []
+  Sym_Angles: []
+  Splines: {fileID: 0}
+  SolvedCount: 0
+  Symmetrical_Angles: 0
+  WinCanvas: {fileID: 0}
+  Angles: []

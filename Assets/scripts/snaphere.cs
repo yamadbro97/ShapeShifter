@@ -11,13 +11,13 @@ public class snaphere : MonoBehaviour
 
     public CircleCollider2D circleCollider;
     public SplineController2 splineController;
-    Vector3 originalPosition;
-
+    Vector3 LastPosition;
 
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
-        originalPosition = transform.position;
+        LastPosition = transform.position;
+        
     }
 
     // Update is called once per frame
@@ -25,8 +25,7 @@ public class snaphere : MonoBehaviour
     {
         HandleInput();
     }
-
-   void HandleInput()
+    void HandleInput()
    {
         // Check if the mouse button is released
         if (Input.GetMouseButtonUp(0))
@@ -49,27 +48,62 @@ public class snaphere : MonoBehaviour
 
             for (int i = 0; i < splineController.pointPrefabs.Length; i++)
             {
+               // Debug.Log(name == "Circle_" + i);
                 if (name == "Circle_" + i)
                 {
                     if (circleCollider.OverlapPoint(closestSnapPosition.transform.position))
                     {
-                        //Debug.Log(name);
+                        if(LastPosition != closestSnapPosition.transform.position) 
+                        {
+                            splineController.move_counter++;
+                            Debug.Log("Amount of moves:" + splineController.move_counter);
+                        }
                         splineController.spline.SetPosition(i, closestSnapPosition.transform.position);
                         splineController.spriteShapeController.BakeMesh();
                         splineController.UpdatePointIndicator(i, closestSnapPosition.transform.position);
+
+                        // CHANGE ORIGINAL POSITION TO THE POSITION THAT IT BECAME, AND NOT THE ONE AT THE START OF THE GAME
+                        LastPosition = closestSnapPosition.transform.position;
                     }
                     else
                     {
                        // Debug.Log(name);
-                        splineController.spline.SetPosition(i, originalPosition);
+                        splineController.spline.SetPosition(i, LastPosition);
                         splineController.spriteShapeController.BakeMesh();
-                        splineController.UpdatePointIndicator(i, originalPosition);
+                        splineController.UpdatePointIndicator(i, LastPosition);
                     }
                 }
             }
-        }
-            
+        }            
    }
+
+    void DisableOtherInstances()
+    {
+        // Find all instances of snaphere in the scene
+        snaphere[] allInstances = FindObjectsOfType<snaphere>();
+
+        foreach (var instance in allInstances)
+        {
+            if (instance != this)
+            {
+                instance.enabled = false; // Disable Update for other instances
+            }
+        }
+    }
+
+    void ReEnableOtherInstances()
+    {
+        // Find all instances of snaphere in the scene
+        snaphere[] allInstances = FindObjectsOfType<snaphere>();
+
+        foreach (var instance in allInstances)
+        {
+            if (instance != this)
+            {
+                instance.enabled = true; // Re-enable Update for other instances
+            }
+        }
+    }
 }
 
 
