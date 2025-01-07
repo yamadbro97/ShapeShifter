@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,9 @@ public class Solved : MonoBehaviour
     public List<SymmAngles> SymAngles;
     public SpriteShapeController Splines;
     public GameObject WinCanvas;
-    //chaange Angles to private after determining all ranges
+    
     public float[] Angles;
+    public float[] SortedAngles;
 
 
     // Start is called before the first frame update
@@ -26,7 +28,7 @@ public class Solved : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //OnSolve();
+        
         if (Input.GetMouseButtonUp(0))
         { 
             IsSolved();
@@ -75,17 +77,52 @@ public class Solved : MonoBehaviour
         return angleDeg;
         
     }
+
+   /* public float[] SortArray(float[] Array)
+    {
+        
+        int i = 0;
+        for (int j=1; j < Array.Length; j++)
+        {
+          if (Splines.spline.GetPosition(j).x < Splines.spline.GetPosition(i).x || (Splines.spline.GetPosition(i).x == Splines.spline.GetPosition(j).x && Splines.spline.GetPosition(j).y >= Splines.spline.GetPosition(i).y))
+          {
+             i = j;
+          }
+        }
+        for(int  j=0; j < Array.Length;j++)
+        {
+            
+            Array[j] = CalcAngle((i+j)%Array.Length);
+            
+        }
+            
+
+        //}
+        return Array;
+    }*/
     public void IsSolved()
     {
         int counter = 0;
         int symcount = 0;
-        for (int i = 0; i < Splines.spline.GetPointCount(); i++)
-      {
-            // save all Angles into an array
-            Angles[i] = CalcAngle(i);
-            //Debug.Log(Angles[i]);
-      }
-      for(int i = 0;i < Splines.spline.GetPointCount();i++)
+        int n = 0;
+        for (int j = 1; j < Angles.Length; j++)
+        {
+            if (Splines.spline.GetPosition(j).x < Splines.spline.GetPosition(n).x || (Splines.spline.GetPosition(n).x == Splines.spline.GetPosition(j).x && Splines.spline.GetPosition(j).y >= Splines.spline.GetPosition(n).y))
+            {
+                n = j;
+            }
+        }
+        for (int j = 0; j < Angles.Length; j++)
+        {
+
+            Angles[j] = CalcAngle((n + j) % Angles.Length);
+
+        }
+      
+
+
+
+        for (int i = 0;i < Splines.spline.GetPointCount();i++)
         {
             if(Ranges[i].min <= Angles[i] && Angles[i] <= Ranges[i].max)
             {

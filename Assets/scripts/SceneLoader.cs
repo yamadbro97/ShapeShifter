@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
     public string LevelName;
     public void LoadScene()
     {
-        Debug.Log(SceneManager.sceneCount);
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.sceneCount);
         if (this.name == "Restart_Button")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
