@@ -14,6 +14,7 @@ public class Solved : MonoBehaviour
     public List<SymmAngles> SymAngles;
     public SpriteShapeController Splines;
     public GameObject WinCanvas;
+    public GameObject Timer;
     
     public float[] Angles;
     public float[] SortedAngles;
@@ -78,28 +79,6 @@ public class Solved : MonoBehaviour
         
     }
 
-   /* public float[] SortArray(float[] Array)
-    {
-        
-        int i = 0;
-        for (int j=1; j < Array.Length; j++)
-        {
-          if (Splines.spline.GetPosition(j).x < Splines.spline.GetPosition(i).x || (Splines.spline.GetPosition(i).x == Splines.spline.GetPosition(j).x && Splines.spline.GetPosition(j).y >= Splines.spline.GetPosition(i).y))
-          {
-             i = j;
-          }
-        }
-        for(int  j=0; j < Array.Length;j++)
-        {
-            
-            Array[j] = CalcAngle((i+j)%Array.Length);
-            
-        }
-            
-
-        //}
-        return Array;
-    }*/
     public void IsSolved()
     {
         int counter = 0;
@@ -144,6 +123,8 @@ public class Solved : MonoBehaviour
       if(counter == Splines.spline.GetPointCount() && symcount == SymAngles.Count)
         {
             WinCanvas.SetActive(true);
+            Timer.SetActive(false);
+            // code to save all relevant information into a csv file here
         }
 
 
