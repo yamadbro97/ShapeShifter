@@ -54,6 +54,7 @@ public class SceneLoader2 : MonoBehaviour
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
 
         }
+        // Pause um interaction method zu wechseln
         if (5<Scene_Manager.SceneCounter && Scene_Manager.SceneCounter< 8)
         {
 
