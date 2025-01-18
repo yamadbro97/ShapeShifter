@@ -18,22 +18,22 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_2.unity
     guid: cc41a8a80ff8ac14bb45cc741ba98957
   - enabled: 1
-    path: Assets/Scenes/Level_3.unity
+    path: Assets/Scenes/Level_4.unity
     guid: 8b21e639b71f6ef43a4f8d21f65c9809
   - enabled: 1
-    path: Assets/Scenes/Level_4.unity
+    path: Assets/Scenes/Level_7.unity
     guid: b6d7433b41253b8448a7a80c4da4d57c
   - enabled: 1
-    path: Assets/Scenes/Level_5.unity
+    path: Assets/Scenes/Level_8.unity
     guid: 15ddef4adda24354ea17b75d2f8f2ce2
   - enabled: 1
-    path: Assets/Scenes/Level_6.unity
+    path: Assets/Scenes/Level_3.unity
     guid: 50dd23194f73f6f4b9aeb297c27dc285
   - enabled: 1
-    path: Assets/Scenes/Level_7.unity
+    path: Assets/Scenes/Level_6.unity
     guid: 71a5a5062c7ec0448af8e81602cfcd6b
   - enabled: 1
-    path: Assets/Scenes/Level_8.unity
+    path: Assets/Scenes/Level_5.unity
     guid: fcf08b6ff43efac4f82318fe01e45f33
   - enabled: 1
     path: Assets/Scenes/Level_9.unity
@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/End_Scene.unity
     guid: 3195d2b470e308d49b017339b5419596
+  - enabled: 1
+    path: Assets/Scenes/Interaction_Option.unity
+    guid: 37f72e3538b52f644a36692966221f97
   m_configObjects: {}

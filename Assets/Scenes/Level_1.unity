@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78b56fe8c622be49844458bdcea00bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: Level_1
+  SceneName: 
 --- !u!1 &1194225969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,8 +1664,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -0.0021896}
+  m_SizeDelta: {x: 200, y: 172.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355717907
 MonoBehaviour:
@@ -1802,7 +1802,6 @@ GameObject:
   - component: {fileID: 1444760291}
   - component: {fileID: 1444760290}
   - component: {fileID: 1444760293}
-  - component: {fileID: 1444760294}
   m_Layer: 5
   m_Name: Next_level_Button
   m_TagString: Untagged
@@ -1934,18 +1933,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e35ecbb4b5018b7498edc546a25c52d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1444760294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444760287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60057485c94fff8448aecfe0ff21886b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1494109031
@@ -3398,9 +3385,25 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
+      propertyPath: L2
+      value: 
+      objectReference: {fileID: 322260513}
+    - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
+      propertyPath: R2
+      value: 
+      objectReference: {fileID: 322260513}
+    - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
+      propertyPath: Res_LVL
+      value: 
+      objectReference: {fileID: 1096678758}
+    - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
       propertyPath: defaultSize
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
+      propertyPath: Enlarge_Image
+      value: 
+      objectReference: {fileID: 322260513}
     - target: {fileID: 4940236937891462426, guid: a342a908edad4684e9d7ab0315ea6622, type: 3}
       propertyPath: defaultColor.b
       value: 0

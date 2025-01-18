@@ -12,6 +12,7 @@ public class SceneLoader2 : MonoBehaviour
 {
    //public Scene_Manager Scene_Manager_counter;
     int counter;
+    public static bool IsTouch;
     private void Start()
     {
         counter = 0;
@@ -20,8 +21,16 @@ public class SceneLoader2 : MonoBehaviour
     public void SceneLoader()
     {
         int x;
-        
-
+        if (this.name == "Controller")
+        {
+            IsTouch = false;
+            Debug.Log(this.name);
+        }
+        if (this.name == "Touch")
+        {
+            IsTouch = true;
+            Debug.Log(this.name);
+        }
 
         if (Scene_Manager.SceneCounter<3)
         {
@@ -31,7 +40,7 @@ public class SceneLoader2 : MonoBehaviour
             Scene_Manager.Easy.Remove(Scene_Manager.Easy[x]);
             Debug.Log("Easy_Levels left:"+Scene_Manager.Easy.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
-
+            
 
         }
         if( 2< Scene_Manager.SceneCounter && Scene_Manager.SceneCounter < 5)
@@ -42,7 +51,7 @@ public class SceneLoader2 : MonoBehaviour
             Scene_Manager.Medium.Remove(Scene_Manager.Medium[x]);
             Debug.Log("Medium_Levels left:" + Scene_Manager.Medium.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
-
+            
         }
         if (Scene_Manager.SceneCounter == 5)
         {
@@ -52,7 +61,20 @@ public class SceneLoader2 : MonoBehaviour
             Scene_Manager.Hard.Remove(Scene_Manager.Hard[x]);
             Debug.Log("Hard_Levels left:" + Scene_Manager.Hard.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
+           
 
+        }
+        if (Scene_Manager.SceneCounter == 6)
+        {
+            IsTouch = !IsTouch;
+            if (IsTouch)
+            {
+                Debug.Log("NEXT LEVEL SHOULD BE PLAYED VIA TOUCH");
+            }
+            else if (!IsTouch)
+            {
+                Debug.Log("NEXT LEVEL SHOULD BE PLAYED VIA CONTROLLER");
+            }
         }
         // Pause um interaction method zu wechseln
         if (5<Scene_Manager.SceneCounter && Scene_Manager.SceneCounter< 8)

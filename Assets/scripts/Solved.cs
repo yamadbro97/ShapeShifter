@@ -16,6 +16,7 @@ public class Solved : MonoBehaviour
     public GameObject WinCanvas;
     public GameObject Timer;
     
+    
     public float[] Angles;
     public float[] SortedAngles;
 
@@ -29,8 +30,7 @@ public class Solved : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || !SplineController2.IsSelected)
         { 
             IsSolved();
         }
@@ -124,7 +124,20 @@ public class Solved : MonoBehaviour
         {
             WinCanvas.SetActive(true);
             Timer.SetActive(false);
+            GameObject.Find("Canvas").SetActive(false);
+            GameObject.Find("splinecontroller").SetActive(false);
+
             // code to save all relevant information into a csv file here
+            /*
+             * .
+             * .
+             * .
+             * .
+             * .
+             * .
+             * */
+            //Reset some Values After Saving Information after every Level Here:
+            Scene_Manager.TriesAmount = 1;
         }
 
 

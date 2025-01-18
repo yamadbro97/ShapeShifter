@@ -1,26 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public string LevelName;
+    [SerializeField]
+    private string SceneName;
     public void LoadScene()
     {
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.sceneCount);
         if (this.name == "Restart_Button")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+            Scene_Manager.TriesAmount++;
+            Debug.Log("This is Try number:"+Scene_Manager.TriesAmount);
         }
         else
         {
-            Debug.Log(SceneManager.GetAllScenes().Length);
-
-            SceneManager.LoadScene(LevelName);
+            SceneManager.LoadScene(SceneName);
         }
-        Debug.Log(SceneManager.GetActiveScene().name);
     }
 }
