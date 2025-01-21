@@ -14,10 +14,10 @@ public class SplineController2 : MonoBehaviour
     public SpriteShapeController spriteShapeController;
     [SerializeField] 
     public GameObject[] pointPrefabs;
-    public Color defaultColor = Color.white;
-    public Color highlightColor = Color.red;
-    public float defaultSize = 0.1f;
-    public float highlightSize = 0.2f;
+    public static Color defaultColor = Color.red;
+    public static Color highlightColor = Color.green;
+    public float defaultSize = 0.4f;
+    public float highlightSize = 0.4f;
     public int move_counter;
     
     // Controller Variables
@@ -30,7 +30,7 @@ public class SplineController2 : MonoBehaviour
     public static  bool IsSelected = false;
     private bool secretbool = false;
     private int currentIndex =0;
-    public Color SelectedColor = Color.yellow;
+    public static Color SelectedColor = Color.blue;
 
 
 
@@ -137,7 +137,13 @@ public class SplineController2 : MonoBehaviour
 
     void ControllerHandleInput()
     {
-        
+        if(Input.GetButtonDown("5"))
+        {
+            if (GameObject.Find("GiveUp_Button"))
+            {
+                GameObject.Find("GiveUp_Button").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
+        }
         if(Input.GetButtonDown("7"))
         {
             //Enlarge_Image.onClick.Invoke();
@@ -153,6 +159,14 @@ public class SplineController2 : MonoBehaviour
             {
                 GameObject.Find("Touch").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
             }
+            if(GameObject.Find("Next_level_Button"))
+            {
+                GameObject.Find("Next_level_Button").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
+            if (GameObject.Find("Yes"))
+            {
+                GameObject.Find("Yes").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
             secretbool = !secretbool;
         }
         if (Input.GetButtonDown("6"))
@@ -165,8 +179,14 @@ public class SplineController2 : MonoBehaviour
             {
                 GameObject.Find("Controller").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
             }
-            else
-            GameObject.Find("Restart_Button").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            if (GameObject.Find("Restart_Button"))
+            {
+                GameObject.Find("Restart_Button").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
+            if (GameObject.Find("No"))
+            {
+                GameObject.Find("No").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
         }
         if (Input.GetButtonDown("1"))
         {
@@ -244,16 +264,8 @@ public class SplineController2 : MonoBehaviour
                     Debug.Log("Point should move right");
                     Vector3 currentposition = pointPrefabs[currentIndex].transform.position;
                     currentposition.z = 0;
-                    currentposition.x = currentposition.x + 1;
-                try
-                {
+                    currentposition.x = currentposition.x + 1; 
                     spline.SetPosition(currentIndex, currentposition);
-                }
-                catch(ArgumentException ex)
-                {
-                    spline.SetPosition(currentIndex, currentposition);
-                    Debug.Log("Exception Ignored!");
-                }
                     spriteShapeController.BakeMesh();
                     UpdatePointIndicator(currentIndex, currentposition);
                 }

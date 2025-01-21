@@ -5,9 +5,9 @@ using UnityEngine;
 public class timer : MonoBehaviour
 {
     [SerializeField]
-    private float timerDuration = 30f * 60;
+    public static float timerDuration = 5f * 60;
     [SerializeField]
-    private float time;
+    public static float time;
     [SerializeField] 
     private bool timeRunning;
 

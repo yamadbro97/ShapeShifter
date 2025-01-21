@@ -197,13 +197,16 @@ MonoBehaviour:
   pointPrefabs: []
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
-  defaultSize: 0.1
-  highlightSize: 0.2
+  defaultSize: 0.4
+  highlightSize: 0.4
+  move_counter: 0
+  Enlarge_Image: {fileID: 0}
+  Res_LVL: {fileID: 0}
+  SelectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   spline:
     m_IsOpenEnded: 0
     m_ControlPoints: []
   selectedPointIndex: -1
-  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4791797928317790727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,9 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ranges: []
-  Sym_Angles: []
+  SymAngles: []
   Splines: {fileID: 0}
-  SolvedCount: 0
-  Symmetrical_Angles: 0
   WinCanvas: {fileID: 0}
+  Timer: {fileID: 0}
+  LoseCanvas: {fileID: 0}
   Angles: []
+  SortedAngles: []

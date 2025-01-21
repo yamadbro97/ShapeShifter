@@ -15,6 +15,9 @@ public class Solved : MonoBehaviour
     public SpriteShapeController Splines;
     public GameObject WinCanvas;
     public GameObject Timer;
+    public GameObject LoseCanvas;
+    private float time;
+    private float timeduration;
     
     
     public float[] Angles;
@@ -31,9 +34,10 @@ public class Solved : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonUp(0) || !SplineController2.IsSelected)
-        { 
-            IsSolved();
+        {
+            StartCoroutine(IsSolved());
         }
+        IsNotSolved();
     }
    public float CalcAngle(int i)
     {
@@ -79,7 +83,7 @@ public class Solved : MonoBehaviour
         
     }
 
-    public void IsSolved()
+    IEnumerator IsSolved()
     {
         int counter = 0;
         int symcount = 0;
@@ -122,10 +126,14 @@ public class Solved : MonoBehaviour
         }
       if(counter == Splines.spline.GetPointCount() && symcount == SymAngles.Count)
         {
+            yield return new WaitForSeconds(0.5f);
             WinCanvas.SetActive(true);
             Timer.SetActive(false);
-            GameObject.Find("Canvas").SetActive(false);
-            GameObject.Find("splinecontroller").SetActive(false);
+            if (GameObject.Find("Canvas"))
+            {
+                GameObject.Find("Canvas").SetActive(false);
+            }
+            //GameObject.Find("splinecontroller").SetActive(false);
 
             // code to save all relevant information into a csv file here
             /*
@@ -139,9 +147,21 @@ public class Solved : MonoBehaviour
             //Reset some Values After Saving Information after every Level Here:
             Scene_Manager.TriesAmount = 1;
         }
-
-
     }
+    void IsNotSolved()
+    {
+        if (timer.time >= timer.timerDuration)
+        {
+            Timer.SetActive(false);
+            LoseCanvas.SetActive(true);
+            if (GameObject.Find("Canvas"))
+            {
+                GameObject.Find("Canvas").SetActive(false);
+            }
+        }
+    }
+
+ 
     [System.Serializable]
     public struct Range
     {
