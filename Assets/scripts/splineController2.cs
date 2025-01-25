@@ -19,12 +19,8 @@ public class SplineController2 : MonoBehaviour
     public float defaultSize = 0.4f;
     public float highlightSize = 0.4f;
     public int move_counter;
-    
+       
     // Controller Variables
-    [SerializeField]
-    public UnityEngine.UI.Button Enlarge_Image;
-    [SerializeField]
-    public UnityEngine.UI.Button Res_LVL;
     private bool IsNavigating = false;
     private bool IsMoving = false;
     public static  bool IsSelected = false;

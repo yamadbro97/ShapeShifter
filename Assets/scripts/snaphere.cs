@@ -8,7 +8,7 @@ using UnityEngine.U2D;
 
 public class snaphere : MonoBehaviour
 {
-
+    public static int UserDataMoveCounter;
     public CircleCollider2D circleCollider;
     public SplineController2 splineController;
     Vector3 LastPosition;
@@ -28,7 +28,7 @@ public class snaphere : MonoBehaviour
     void HandleInput()
    {
         // Check if the mouse button is released
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !SplineController2.IsSelected)
         {
             GameObject[] snapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
             float closestTarget = float.MaxValue;
@@ -55,7 +55,8 @@ public class snaphere : MonoBehaviour
                     {
                         if(LastPosition != closestSnapPosition.transform.position) 
                         {
-                            splineController.move_counter++;
+                             splineController.move_counter++;
+                            UserDataMoveCounter = splineController.move_counter;
                             Debug.Log("Amount of moves:" + splineController.move_counter);
                         }
                         splineController.spline.SetPosition(i, closestSnapPosition.transform.position);

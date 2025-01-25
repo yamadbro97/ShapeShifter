@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78b56fe8c622be49844458bdcea00bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: Interaction_Option
+  SceneName: UserID
 --- !u!1 &1170213981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,14 +1083,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteShapeController: {fileID: 0}
   pointPrefabs: []
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
   defaultSize: 0.1
   highlightSize: 0.2
   move_counter: 0
   Enlarge_Image: {fileID: 708064750}
   Res_LVL: {fileID: 1102795889}
-  SelectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   spline:
     m_IsOpenEnded: 0
     m_ControlPoints: []

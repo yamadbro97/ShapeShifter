@@ -10,6 +10,7 @@ public class timer : MonoBehaviour
     public static float time;
     [SerializeField] 
     private bool timeRunning;
+    public static string UserDataTime;
 
     [SerializeField]
     private string firstMinute;
@@ -51,6 +52,7 @@ public class timer : MonoBehaviour
         seperator = ":";
         firstSecond = currentTime[2].ToString();
         secondSecond = currentTime[3].ToString();
+        UserDataTime = firstMinute+secondMinute+seperator+firstSecond+secondSecond;
     }
 
 }

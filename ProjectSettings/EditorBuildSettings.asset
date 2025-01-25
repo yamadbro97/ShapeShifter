@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Interaction_Option.unity
     guid: 37f72e3538b52f644a36692966221f97
+  - enabled: 1
+    path: Assets/Scenes/UserID.unity
+    guid: 0b2bfbbb433bc62428e6341136915697
   m_configObjects: {}

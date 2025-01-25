@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
@@ -18,11 +21,17 @@ public class Solved : MonoBehaviour
     public GameObject LoseCanvas;
     private float time;
     private float timeduration;
+    private string InputMethod;
+    private bool Finished = false;
+    public bool giveUp = false;
+    private bool secretbool = false;
+    private bool secretbool2 = false;
     
-    
+
+
+
     public float[] Angles;
     public float[] SortedAngles;
-
 
     // Start is called before the first frame update
     void Start()
@@ -80,14 +89,19 @@ public class Solved : MonoBehaviour
         float angleDeg = angleRad * Mathf.Rad2Deg;
         //Debug.Log(angleDeg);
         return angleDeg;
-        
-    }
 
+    }
+    public void GaveUp(bool setvalue)
+    {
+        giveUp =setvalue;
+    }
     IEnumerator IsSolved()
     {
         int counter = 0;
         int symcount = 0;
         int n = 0;
+        if (SceneLoader2.IsTouch == false) InputMethod = "Controller";
+        if (SceneLoader2.IsTouch == true) InputMethod = "Touch";
         for (int j = 1; j < Angles.Length; j++)
         {
             if (Splines.spline.GetPosition(j).x < Splines.spline.GetPosition(n).x || (Splines.spline.GetPosition(n).x == Splines.spline.GetPosition(j).x && Splines.spline.GetPosition(j).y >= Splines.spline.GetPosition(n).y))
@@ -124,8 +138,10 @@ public class Solved : MonoBehaviour
 
             }
         }
-      if(counter == Splines.spline.GetPointCount() && symcount == SymAngles.Count)
-        {
+      if(counter == Splines.spline.GetPointCount() && symcount == SymAngles.Count && secretbool ==false)
+      {
+            secretbool = true;
+            Finished = true;
             yield return new WaitForSeconds(0.5f);
             WinCanvas.SetActive(true);
             Timer.SetActive(false);
@@ -133,31 +149,54 @@ public class Solved : MonoBehaviour
             {
                 GameObject.Find("Canvas").SetActive(false);
             }
-            //GameObject.Find("splinecontroller").SetActive(false);
 
             // code to save all relevant information into a csv file here
             /*
              * .
              * .
-             * .
-             * .
+             * .*/
+           
+            CSVManager.AppendToUserData(new string[7]
+            { Scene_Manager.UserID,
+                 SceneLoader2.UserDataSceneName,
+                InputMethod,
+                Scene_Manager.TriesAmount.ToString(),
+                snaphere.UserDataMoveCounter.ToString(),
+                timer.UserDataTime,
+                Finished.ToString()
+            }) ;
+            /* * .
              * .
              * .
              * */
             //Reset some Values After Saving Information after every Level Here:
             Scene_Manager.TriesAmount = 1;
-        }
+      }
     }
     void IsNotSolved()
     {
-        if (timer.time >= timer.timerDuration)
+        if (SceneLoader2.IsTouch == false) InputMethod = "Controller";
+        if (SceneLoader2.IsTouch == true) InputMethod = "Touch";
+        if ((timer.time >= timer.timerDuration || giveUp == true) && secretbool2 == false)
         {
+            secretbool2 = true;
+            Finished = false;
             Timer.SetActive(false);
-            LoseCanvas.SetActive(true);
+            //LoseCanvas.SetActive(true);
             if (GameObject.Find("Canvas"))
             {
                 GameObject.Find("Canvas").SetActive(false);
             }
+            CSVManager.AppendToUserData(new string[7]
+           { Scene_Manager.UserID,
+                 SceneLoader2.UserDataSceneName,
+                InputMethod,
+                Scene_Manager.TriesAmount.ToString(),
+                snaphere.UserDataMoveCounter.ToString(),
+                timer.UserDataTime,
+                Finished.ToString()
+           });
+            Scene_Manager.TriesAmount = 1;
         }
     }
 

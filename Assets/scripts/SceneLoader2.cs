@@ -12,11 +12,18 @@ public class SceneLoader2 : MonoBehaviour
 {
    //public Scene_Manager Scene_Manager_counter;
     int counter;
+    public static string UserDataSceneName;
     public static bool IsTouch;
     private void Start()
     {
         counter = 0;
         
+    }
+
+    IEnumerator NextSceneLoader (string str)
+    {
+        yield return new WaitForSeconds(0f);
+        SceneManager.LoadScene(str);
     }
     public void SceneLoader()
     {
@@ -36,7 +43,8 @@ public class SceneLoader2 : MonoBehaviour
         {
            
             x = UnityEngine.Random.Range(0, Scene_Manager.Easy.Count);
-            SceneManager.LoadScene(Scene_Manager.Easy[x]);
+            UserDataSceneName = Scene_Manager.Easy[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Easy[x]));
             Scene_Manager.Easy.Remove(Scene_Manager.Easy[x]);
             Debug.Log("Easy_Levels left:"+Scene_Manager.Easy.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -47,7 +55,8 @@ public class SceneLoader2 : MonoBehaviour
         {
 
             x = UnityEngine.Random.Range(0, Scene_Manager.Medium.Count);
-            SceneManager.LoadScene(Scene_Manager.Medium[x]);
+            UserDataSceneName = Scene_Manager.Medium[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Medium[x]));
             Scene_Manager.Medium.Remove(Scene_Manager.Medium[x]);
             Debug.Log("Medium_Levels left:" + Scene_Manager.Medium.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -57,7 +66,8 @@ public class SceneLoader2 : MonoBehaviour
         {
 
             x = UnityEngine.Random.Range(0, Scene_Manager.Hard.Count);
-            SceneManager.LoadScene(Scene_Manager.Hard[x]);
+            UserDataSceneName = Scene_Manager.Hard[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Hard[x]));
             Scene_Manager.Hard.Remove(Scene_Manager.Hard[x]);
             Debug.Log("Hard_Levels left:" + Scene_Manager.Hard.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -81,7 +91,8 @@ public class SceneLoader2 : MonoBehaviour
         {
 
             x = UnityEngine.Random.Range(0, Scene_Manager.Easy.Count);
-            SceneManager.LoadScene(Scene_Manager.Easy[x]);
+            UserDataSceneName = Scene_Manager.Easy[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Easy[x]));
             Scene_Manager.Easy.Remove(Scene_Manager.Easy[x]);
             Debug.Log("Easy_Levels left:" + Scene_Manager.Easy.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -92,7 +103,8 @@ public class SceneLoader2 : MonoBehaviour
         {
 
             x = UnityEngine.Random.Range(0, Scene_Manager.Medium.Count);
-            SceneManager.LoadScene(Scene_Manager.Medium[x]);
+            UserDataSceneName = Scene_Manager.Medium[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Medium[x]));
             Scene_Manager.Medium.Remove(Scene_Manager.Medium[x]);
             Debug.Log("Medium_Levels left:" + Scene_Manager.Medium.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -102,7 +114,8 @@ public class SceneLoader2 : MonoBehaviour
         {
 
             x = UnityEngine.Random.Range(0, Scene_Manager.Hard.Count);
-            SceneManager.LoadScene(Scene_Manager.Hard[x]);
+            UserDataSceneName = Scene_Manager.Hard[x];
+            StartCoroutine(NextSceneLoader(Scene_Manager.Hard[x]));
             Scene_Manager.Hard.Remove(Scene_Manager.Hard[x]);
             Debug.Log("Hard_Levels left:" + Scene_Manager.Hard.Count);
             Debug.Log("this is scene number:" + Scene_Manager.SceneCounter);
@@ -113,6 +126,7 @@ public class SceneLoader2 : MonoBehaviour
             SceneManager.LoadScene("End_Scene");
         }
         Scene_Manager.SceneCounter++;
+
 
     }
 
