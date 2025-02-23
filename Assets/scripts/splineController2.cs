@@ -27,6 +27,7 @@ public class SplineController2 : MonoBehaviour
     private bool secretbool = false;
     private int currentIndex =0;
     public static Color SelectedColor = Color.blue;
+    public float MoveSpeed = 10f;
 
 
 
@@ -219,62 +220,35 @@ public class SplineController2 : MonoBehaviour
         
         if (IsSelected)
             {
-                if (Input.GetAxis("Vertical") < -0.5f && !IsMoving)
-                {
-                    IsMoving = true;
-                    Debug.Log("Point should move down");
-                    Vector3 currentposition = pointPrefabs[currentIndex].transform.position;
-                    currentposition.z = 0;
-                    currentposition.y = currentposition.y - 1;
-                    spline.SetPosition(currentIndex, currentposition);
-                    spriteShapeController.BakeMesh();
-                    UpdatePointIndicator(currentIndex, currentposition);
+            // If the joystick is outside the dead zone
+            if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f)
+            {
+                Vector3 currentPosition = pointPrefabs[currentIndex].transform.position;
+                currentPosition.z = 0;
 
-                }
-                if (Input.GetAxis("Vertical") > 0.5f && !IsMoving)
-                {
-                    IsMoving = true;
-                    Debug.Log("Point should move up");
-                    Vector3 currentposition = pointPrefabs[currentIndex].transform.position;
-                    currentposition.z = 0;
-                    currentposition.y = currentposition.y + 1;
-                    spline.SetPosition(currentIndex, currentposition);
-                    spriteShapeController.BakeMesh();
-                    UpdatePointIndicator(currentIndex, currentposition);
-                }
-            
-                if (Input.GetAxis("Horizontal") < -0.5f && !IsMoving)
-                {
-                    IsMoving = true;
-                    Debug.Log("Point should move left");
-                    Vector3 currentposition = pointPrefabs[currentIndex].transform.position;
-                    currentposition.z = 0;
-                    currentposition.x = currentposition.x - 1;
-                    spline.SetPosition(currentIndex, currentposition);
-                    spriteShapeController.BakeMesh();
-                    UpdatePointIndicator(currentIndex, currentposition);
-                }
-                if (Input.GetAxis("Horizontal") > 0.5f && !IsMoving)
-                {
-                    IsMoving = true;
-                    Debug.Log("Point should move right");
-                    Vector3 currentposition = pointPrefabs[currentIndex].transform.position;
-                    currentposition.z = 0;
-                    currentposition.x = currentposition.x + 1; 
-                    spline.SetPosition(currentIndex, currentposition);
-                    spriteShapeController.BakeMesh();
-                    UpdatePointIndicator(currentIndex, currentposition);
-                }
-                if (Mathf.Abs(Input.GetAxis("Vertical")) < 0.5f && Mathf.Abs(Input.GetAxis("Horizontal")) < 0.5f)
-                {
+                // Move vertically
+                currentPosition.y += Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+
+                // Move horizontally
+                currentPosition.x += Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
+
+                // Update the spline position and bake the mesh
+                spline.SetPosition(currentIndex, currentPosition);
+                spriteShapeController.BakeMesh();
+
+                // Update the point indicator
+                UpdatePointIndicator(currentIndex, currentPosition);
+
+                IsMoving = true;
+            }
+            else
+            {
+                // Stop movement when the joystick is in the dead zone
                 IsMoving = false;
-                }
+            }
         }
-           
-
-
-
     }
+           
 
 
     int GetClosestPointIndex(Vector3 position)

@@ -13,7 +13,7 @@ public class SceneLoader2 : MonoBehaviour
    //public Scene_Manager Scene_Manager_counter;
     int counter;
     public static string UserDataSceneName;
-    public static bool IsTouch;
+    public static bool IsTouch = true;
     private void Start()
     {
         counter = 0;

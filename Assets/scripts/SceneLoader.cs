@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private string SceneName;
     private string InputMethod;
+    public static bool IsTouch;
     public void LoadScene()
     {
         if (this.name == "Restart_Button")
@@ -33,5 +34,9 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.LoadScene(SceneName);
         }
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

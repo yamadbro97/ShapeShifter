@@ -5,7 +5,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
@@ -156,7 +156,7 @@ public class Solved : MonoBehaviour
              * .
              * .*/
            
-            CSVManager.AppendToUserData(new string[7]
+           CSVManager.AppendToUserData(new string[7]
             { Scene_Manager.UserID,
                  SceneLoader2.UserDataSceneName,
                 InputMethod,
@@ -182,7 +182,7 @@ public class Solved : MonoBehaviour
             secretbool2 = true;
             Finished = false;
             Timer.SetActive(false);
-            //LoseCanvas.SetActive(true);
+            LoseCanvas.SetActive(true);
             if (GameObject.Find("Canvas"))
             {
                 GameObject.Find("Canvas").SetActive(false);

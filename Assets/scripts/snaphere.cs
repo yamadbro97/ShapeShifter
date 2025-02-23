@@ -28,7 +28,7 @@ public class snaphere : MonoBehaviour
     void HandleInput()
    {
         // Check if the mouse button is released
-        if (Input.GetMouseButtonUp(0) && !SplineController2.IsSelected)
+        if ((Input.GetMouseButtonUp(0) || Input.GetButtonUp("1")) && !SplineController2.IsSelected)
         {
             GameObject[] snapPositions = GameObject.FindGameObjectsWithTag("SnapPosition");
             float closestTarget = float.MaxValue;
